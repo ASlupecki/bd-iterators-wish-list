@@ -1,6 +1,9 @@
 import java.util.List;
+import java.util.ListIterator;
 
 public class WishList {
+
+
 
     /**
      * Add a given item to the end of the list.
@@ -9,6 +12,14 @@ public class WishList {
      * @return the wishList with the newly added item
      */
     public List<WishListItem> addLast(List<WishListItem> wishList, WishListItem item) {
+        ListIterator<WishListItem> iterator = wishList.listIterator();
+
+        while(iterator.hasNext()) {
+            iterator.next();
+        }
+
+        iterator.add(item);
+
         return wishList;
     }
 
@@ -20,6 +31,23 @@ public class WishList {
      * @return the wishList with the newly added item
      */
     public List<WishListItem> addAtIndex(List<WishListItem> wishList, WishListItem item, int index) {
+        ListIterator<WishListItem> iterator = wishList.listIterator();
+
+        if(index > wishList.size() - 1) {
+            addLast(wishList, item);
+        }
+
+        if(index <= wishList.size() - 1) {
+            for(int i = 0; i < wishList.size(); i++) {
+                if(index == i) {
+                    iterator.add(item);
+                } else {
+                    iterator.next();
+                }
+
+            }
+
+        }
         return wishList;
     }
 
@@ -29,6 +57,14 @@ public class WishList {
      * @return the empty wishList
      */
     public List<WishListItem> removeAll(List<WishListItem> wishList) {
+
+        ListIterator<WishListItem> iterator = wishList.listIterator();
+
+        while(iterator.hasNext()) {
+            iterator.next();
+            iterator.remove();
+        }
+
         return wishList;
     }
 
@@ -39,6 +75,16 @@ public class WishList {
      * @return the wishList with the removed item
      */
     public List<WishListItem> removeItem(List<WishListItem> wishList, WishListItem item) {
+        ListIterator<WishListItem> iterator = wishList.listIterator();
+
+        for (WishListItem wishListItem : wishList) {
+            iterator.next();
+            if (wishListItem == item) {
+                iterator.remove();
+            }
+        }
+
+
         return wishList;
     }
 }
